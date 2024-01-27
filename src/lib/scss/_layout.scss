@@ -1,0 +1,126 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: var(--xsSpacing);
+    > :first-child {
+        border-top-left-radius: var(--baseRadius);
+        border-top-right-radius: var(--baseRadius);
+    }
+    > :last-child {
+        border-top-left-radius: var(--baseRadius);
+        border-top-right-radius: var(--baseRadius);
+    }
+
+    @media screen and (max-width: 600px) {
+        padding: 10px;
+    }
+}
+
+.page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    flex-grow: 1;
+    margin: 0 auto;
+    border-radius: var(--lgRadius);
+    width: var(--wrapperWidth);
+    min-height: 100%;
+    max-width: 100%;
+    background: var(--baseAlt1Color);
+}
+
+.page-content {
+    padding: var(--baseSpacing);
+    > :first-child {
+        margin-top: 0;
+    }
+    > :last-child {
+        margin-bottom: 0;
+    }
+    %h {
+        margin: var(--smSpacing) 0 10px;
+    }
+}
+
+.page-header {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: var(--xsSpacing) var(--smSpacing);
+    border-bottom: 1px solid var(--baseColor);
+
+    @media screen and (max-width: 600px) {
+        .hidden-responsive {
+            display: none;
+        }
+    }
+}
+
+.page-footer {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 45px;
+    gap: var(--smSpacing);
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: auto;
+    padding: 10px var(--smSpacing);
+    color: var(--txtHintColor);
+    font-size: var(--smFontSize);
+    line-height: var(--smLineHeight);
+    border-top: 1px solid var(--baseColor);
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    .footer-item {
+        display: flex;
+        align-items: center;
+        gap: var(--smSpacing);
+    }
+    .social {
+        justify-content: flex-end;
+    }
+    .credits,
+    .social {
+        width: 30%;
+    }
+    .links {
+        width: 70%;
+        justify-content: center;
+    }
+    a:not(.btn) {
+        text-decoration: none;
+        color: inherit;
+        transition: color var(--baseAnimationSpeed);
+        &:hover,
+        &:focus {
+            color: var(--txtBaseColor);
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .credits {
+            margin-right: auto;
+        }
+        .footer-item {
+            width: auto;
+        }
+    }
+    @media screen and (max-width: 750px) {
+        flex-wrap: wrap;
+        padding-top: var(--smSpacing);
+        padding-bottom: var(--smSpacing);
+        .footer-item {
+            width: 100%;
+            justify-content: center;
+        }
+        .links {
+            flex-wrap: wrap;
+        }
+    }
+}

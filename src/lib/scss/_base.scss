@@ -1,0 +1,727 @@
+@include scrollbar();
+
+:focus-visible {
+    outline: 2px dotted var(--secondaryColor);
+}
+
+::selection {
+    background: var(--primaryAltColor);
+}
+
+html,
+body {
+    line-height: var(--baseLineHeight);
+    font-family: var(--baseFontFamily);
+    font-size: var(--baseFontSize);
+    color: var(--txtBaseColor);
+    background: var(--baseColor);
+}
+
+%block {
+    display: block;
+    width: 100%;
+}
+
+// headings
+%h {
+    margin: 0;
+    font-weight: normal;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @extend %h;
+}
+h1 {
+    font-size: 22px;
+    line-height: 30px;
+}
+h2 {
+    font-size: 20px;
+    line-height: 26px;
+}
+h3 {
+    font-size: 19px;
+    line-height: 24px;
+}
+h4 {
+    font-size: 18px;
+    line-height: 24px;
+}
+h5 {
+    font-size: 17px;
+    line-height: 24px;
+}
+h6 {
+    font-size: 16px;
+    line-height: 22px;
+}
+
+em {
+    font-style: italic;
+}
+
+ins {
+    color: var(--txtBaseColor);
+    background: var(--successAltColor);
+    text-decoration: none;
+}
+
+del {
+    color: var(--txtBaseColor);
+    background: var(--dangerAltColor);
+    text-decoration: none;
+}
+
+strong {
+    font-weight: bold;
+}
+
+small {
+    @include smFontSize();
+    line-height: var(--smLineHeight);
+}
+
+sub,
+sup {
+    position: relative;
+    font-size: 0.8em;
+    line-height: 1;
+}
+sup {
+    vertical-align: top;
+}
+sub {
+    vertical-align: bottom;
+}
+
+p {
+    @extend %block;
+    margin: 10px 0;
+}
+
+blockquote {
+    @extend %block;
+    position: relative;
+    padding-left: var(--xsSpacing);
+    font-style: italic;
+    color: var(--txtHintColor);
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2px;
+        height: 100%;
+        background: var(--baseAlt1Color);
+    }
+}
+
+code {
+    display: inline-block;
+    font-family: var(--monospaceFontFamily);
+    font-style: normal;
+    font-size: 1em;
+    line-height: 1.379rem;
+    padding: 0px 4px;
+    white-space: nowrap;
+    color: var(--txtBaseColor);
+    background: var(--baseAlt2Color);
+    border-radius: var(--baseRadius);
+}
+
+.code-block {
+    @extend %block;
+    overflow: auto;
+    padding: var(--xsSpacing);
+    white-space: pre-wrap;
+    background: var(--baseAlt1Color);
+}
+
+ol,
+ul {
+    margin: 10px 0;
+    list-style: decimal;
+    padding-left: var(--baseSpacing);
+    li {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+ul {
+    list-style: disc;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: top;
+}
+
+hr {
+    display: block;
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--baseAlt1Color);
+    margin: var(--baseSpacing) 0;
+    &.dark {
+        background: var(--baseAlt2Color);
+    }
+}
+
+a {
+    color: inherit;
+    &:hover {
+        text-decoration: none;
+    }
+    i,
+    .txt {
+        display: inline-block;
+        vertical-align: top;
+    }
+}
+
+// text helpers
+.txt-mono {
+    font-family: var(--monospaceFontFamily);
+}
+.txt-nowrap {
+    white-space: nowrap;
+}
+.txt-ellipsis {
+    display: inline-block;
+    vertical-align: top;
+    flex-shrink: 1;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.txt-base {
+    font-size: var(--baseFontSize) !important;
+}
+.txt-xs {
+    @include xsFontSize(true);
+    line-height: var(--smLineHeight);
+}
+.txt-sm {
+    @include smFontSize(true);
+    line-height: var(--smLineHeight);
+}
+.txt-lg {
+    @include lgFontSize(true);
+}
+.txt-xl {
+    @include xlFontSize(true);
+}
+.txt-bold {
+    font-weight: bold !important;
+}
+.txt-strikethrough {
+    text-decoration: line-through !important;
+}
+.txt-break {
+    white-space: pre-wrap !important;
+}
+.txt-center {
+    text-align: center !important;
+}
+.txt-justify {
+    text-align: justify !important;
+}
+.txt-left {
+    text-align: left !important;
+}
+.txt-right {
+    text-align: right !important;
+}
+.txt-main {
+    color: var(--txtBaseColor) !important;
+}
+.txt-hint {
+    color: var(--txtHintColor) !important;
+}
+.txt-disabled {
+    color: var(--txtDisabledColor) !important;
+}
+.link-hint {
+    user-select: none;
+    cursor: pointer;
+    color: var(--txtHintColor) !important;
+    text-decoration: none;
+    transition: color var(--baseAnimationSpeed);
+    &:has(.dropdown.active),
+    &:hover,
+    &:focus-visible,
+    &:active {
+        color: var(--txtBaseColor) !important;
+    }
+}
+.link-fade {
+    opacity: 1;
+    user-select: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--txtBaseColor);
+    transition: opacity var(--baseAnimationSpeed);
+    &:focus-visible,
+    &:hover,
+    &:active {
+        opacity: 0.8;
+    }
+}
+
+// color helpers
+@each $name, $color in $colorsMap {
+    .txt-#{$name} {
+        color: $color !important;
+    }
+    .bg-#{$name} {
+        background: $color !important;
+    }
+    .link-#{$name} {
+        cursor: pointer;
+        color: $color !important;
+        text-decoration: none;
+        user-select: none;
+        transition: opacity var(--baseAnimationSpeed);
+        &:has(.dropdown.active),
+        &:focus-visible,
+        &:hover,
+        &:active {
+            opacity: 0.8;
+        }
+    }
+}
+
+.fade {
+    opacity: 0.55;
+}
+a,
+.btn,
+.select,
+[tabindex],
+[class*="link-"],
+.handle,
+.active {
+    &.fade {
+        outline: 0;
+        text-decoration: none;
+        transition: all var(--baseAnimationSpeed);
+        &:hover,
+        &:focus-visible,
+        &:active,
+        &.active {
+            opacity: 1;
+        }
+    }
+}
+
+.invisible {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.hidden-empty {
+    &:empty {
+        display: none !important;
+    }
+}
+
+.no-pointer-events {
+    pointer-events: none;
+}
+
+.no-animation {
+    animation: none !important;
+}
+
+.block {
+    @extend %block;
+}
+
+.content {
+    @extend %block;
+    min-width: 0;
+    & > :first-child {
+        margin-top: 0;
+    }
+    & > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.shadowize {
+    @include shadowize();
+}
+
+.no-shadow {
+    box-shadow: none !important;
+}
+
+.clearfix {
+    @extend %block;
+    clear: both;
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+// flex helpers
+.flex {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    gap: var(--smSpacing);
+}
+.flex-list {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: var(--xsSpacing);
+}
+.flex-fill {
+    flex: 1 !important;
+}
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+.flex-nowrap {
+    flex-wrap: nowrap !important;
+}
+.flex-align-self-center {
+    align-self: center;
+}
+.inline-flex {
+    position: relative;
+    display: inline-flex;
+    vertical-align: top;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 0;
+    gap: 5px;
+}
+@for $i from 0 through 6 {
+    .flex-order-#{$i} {
+        order: $i;
+    }
+}
+
+// flex gap helpers
+@each $sizeAlias, $size in $sizesMap {
+    .flex-gap-#{$sizeAlias} {
+        gap: $size !important;
+    }
+    .flex-row-gap-#{$sizeAlias} {
+        row-gap: $size !important;
+    }
+    .flex-column-gap-#{$sizeAlias} {
+        column-gap: $size !important;
+    }
+}
+@for $i from 0 through 10 {
+    $spacing: 5 * $i;
+    .flex-gap-#{$spacing} {
+        gap: $spacing * 1px !important;
+    }
+    .flex-row-gap-#{$spacing} {
+        row-gap: $spacing * 1px !important;
+    }
+    .flex-column-gap-#{$spacing} {
+        column-gap: $spacing * 1px !important;
+    }
+}
+
+// spacing helpers
+@each $sizeAlias, $size in $sizesMap {
+    .m-#{$sizeAlias} {
+        margin: $size !important;
+    }
+    .p-#{$sizeAlias} {
+        padding: $size !important;
+    }
+}
+@each $sideAlias, $side in $sidesMap {
+    .m-#{$sideAlias}-auto {
+        margin-#{$side}: auto !important;
+    }
+    .p-#{$sideAlias}-auto {
+        padding-#{$side}: auto !important;
+    }
+    @each $sizeAlias, $size in $sizesMap {
+        .m-#{$sideAlias}-#{$sizeAlias} {
+            margin-#{$side}: $size !important;
+        }
+        .p-#{$sideAlias}-#{$sizeAlias} {
+            padding-#{$side}: $size !important;
+        }
+    }
+}
+@for $i from 0 through 12 {
+    $spacing: 5 * $i;
+    .m-#{$spacing} {
+        margin: $spacing * 1px !important;
+    }
+    .p-#{$spacing} {
+        padding: $spacing * 1px !important;
+    }
+    @each $sideAlias, $side in $sidesMap {
+        .m-#{$sideAlias}-#{$spacing} {
+            margin-#{$side}: $spacing * 1px !important;
+        }
+        .p-#{$sideAlias}-#{$spacing} {
+            padding-#{$side}: $spacing * 1px !important;
+        }
+    }
+}
+.no-min-width {
+    min-width: 0 !important;
+}
+
+.wrapper {
+    position: relative;
+    width: var(--wrapperWidth);
+    margin: 0 auto;
+    max-width: 100%;
+    &.wrapper-sm {
+        width: var(--smWrapperWidth);
+    }
+    &.wrapper-lg {
+        width: var(--lgWrapperWidth);
+    }
+}
+
+.label {
+    --labelVPadding: 3px;
+    --labelHPadding: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    gap: 5px;
+    padding: var(--labelVPadding) var(--labelHPadding);
+    min-height: 25px;
+    max-width: 100%;
+    text-align: center;
+    @include smFontSize();
+    line-height: var(--smLineHeight);
+    background: var(--baseAlt2Color);
+    color: var(--txtBaseColor);
+    white-space: nowrap;
+    border-radius: 30px;
+
+    .btn:last-child {
+        margin-right: calc(-0.5 * var(--labelHPadding));
+    }
+    .btn:first-child {
+        margin-left: calc(-0.5 * var(--labelHPadding));
+    }
+
+    // styles
+    &.label-sm {
+        --labelHPadding: 7px;
+        font-size: var(--xsFontSize);
+        min-height: var(--xsBtnHeight);
+        line-height: 1;
+    }
+    &.label-disabled {
+        color: var(--txtDisabledColor);
+    }
+    &.label-hint {
+        color: var(--txtHintColor);
+    }
+    &.label-primary {
+        background: var(--primaryAltColor);
+    }
+    &.label-success {
+        background: var(--successAltColor);
+    }
+    &.label-danger {
+        background: var(--dangerAltColor);
+    }
+    &.label-warning {
+        background: var(--warningAltColor);
+    }
+}
+
+.loader {
+    --loaderSize: 32px;
+
+    position: relative;
+    display: inline-flex;
+    vertical-align: top;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+    margin: 0;
+    color: var(--txtDisabledColor);
+    text-align: center;
+    font-weight: normal;
+    user-select: none;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    aspect-ratio: 1;
+    &:before {
+        @extend %loaderIcon;
+        content: "";
+        display: inline-block;
+        vertical-align: top;
+        background: currentColor;
+        width: var(--loaderSize);
+        height: var(--loaderSize);
+        line-height: var(--loaderSize);
+        font-size: var(--loaderSize);
+        font-family: var(--iconFontFamily);
+        font-weight: normal;
+        color: inherit;
+        text-align: center;
+        animation:
+            loaderShow var(--baseAnimationSpeed),
+            rotate 1.2s var(--baseAnimationSpeed) infinite linear;
+    }
+
+    // styles
+    @each $name, $color in $colorsMap {
+        &.loader-#{$name} {
+            color: $color;
+        }
+    }
+
+    // sizes
+    &.loader-xs {
+        --loaderSize: 18px;
+    }
+    &.loader-sm {
+        --loaderSize: 24px;
+    }
+    &.loader-lg {
+        --loaderSize: 42px;
+    }
+    &.loader-auto {
+        width: 40%;
+        max-width: 42px;
+        &:before {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.skeleton-loader {
+    @extend %block;
+    position: relative;
+    height: 13px;
+    margin: 5px 0;
+    border-radius: var(--baseRadius);
+    background: var(--baseAlt1Color);
+    &:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: inherit;
+        background: linear-gradient(
+            90deg,
+            var(--baseAlt1Color) 0%,
+            var(--baseColor) 50%,
+            var(--baseAlt1Color) 100%
+        );
+        background-size: 200% 100%;
+        animation: shine 1s 0.1s linear infinite;
+    }
+}
+
+.lazy-load {
+    position: relative;
+    min-height: 24px;
+    border-radius: inherit;
+    img {
+        animation: fadeIn var(--baseAnimationSpeed);
+    }
+    &.loading img {
+        opacity: 0;
+        animation: none;
+    }
+    .skeleton-loader {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        height: 100%;
+    }
+    .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.marker {
+    --statusSize: 9px;
+    width: var(--statusSize);
+    height: var(--statusSize);
+    background: var(--primaryColor);
+    border-radius: 50%;
+
+    // styles
+    @each $name, $color in $colorsMap {
+        &.marker-#{$name} {
+            background: $color;
+        }
+    }
+}
+
+.logo {
+    position: relative;
+    display: inline-flex;
+    vertical-align: top;
+    align-items: center;
+    gap: var(--xsSpacing);
+    color: var(--txtBaseColor);
+    font-size: 22px;
+    line-height: 1;
+    font-weight: bold;
+    text-decoration: none;
+    .txt {
+        position: relative;
+        margin-top: -4px;
+    }
+    .version {
+        position: absolute;
+        left: 0;
+        bottom: 100%;
+        margin-top: -5px;
+        font-weight: bold;
+        font-size: 0.65rem;
+        line-height: 1;
+        padding: 4px 6px;
+        border-radius: var(--lgRadius);
+        color: #fff;
+        background: var(--accentColor);
+        transition: background var(--baseAnimationSpeed);
+    }
+    &.logo-sm {
+        font-size: 20px;
+        gap: 10px;
+    }
+}
+
+.screenshot {
+    display: inline-block;
+    vertical-align: top;
+    border-radius: var(--smRadius);
+    @include shadowize();
+}

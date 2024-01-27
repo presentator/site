@@ -1,0 +1,347 @@
+@keyframes entranceBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes entranceScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page.landing {
+    $landingAnimation: 0.3s;
+
+    width: var(--lgWrapperWidth);
+    max-height: 1600px;
+    margin: auto;
+    .cell {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+        min-height: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .primary-row,
+    .secondary-row {
+        position: relative;
+        display: flex;
+        align-items: stretch;
+        flex-grow: 1;
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+    }
+    .primary-row {
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        overflow: hidden;
+        background-color: var(--accentColor);
+        transition: background var(--baseAnimationSpeed);
+    }
+    .secondary-row {
+        overflow: hidden;
+        border-top: 1px solid var(--baseColor);
+        .cell {
+            height: auto;
+            box-shadow: -1px 0px 1px 0px var(--baseColor);
+            opacity: 0;
+            animation: entranceBottom $landingAnimation ease-out forwards;
+            @for $i from 1 through 5 {
+                &:nth-child(#{$i}) {
+                    animation-delay: #{0.15s * $i};
+                }
+            }
+            &:first-child {
+                box-shadow: none;
+            }
+        }
+    }
+
+    .slider {
+        flex-direction: column;
+        display: flex;
+        height: auto;
+        justify-content: center;
+        padding: 100px var(--baseSpacing) var(--baseSpacing) var(--baseSpacing);
+        gap: var(--smSpacing);
+        animation: entranceScale $landingAnimation ease-out;
+        .slider-screens {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: top;
+            max-height: 100%;
+            flex-shrink: 1;
+            border-radius: var(--baseRadius);
+            .slide {
+                position: absolute;
+                z-index: 1;
+                display: inline-flex;
+                align-items: flex-start;
+                justify-content: center;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+                transform-origin: top;
+                transition:
+                    margin var(--baseAnimationSpeed),
+                    opacity var(--baseAnimationSpeed),
+                    transform var(--baseAnimationSpeed);
+                img {
+                    max-height: 100%;
+                }
+                $scales: 0.8, 0.85, 0.9, 0.95;
+                $i: 1;
+                @each $scale in $scales {
+                    &:nth-child(#{$i}) {
+                        transform: translateY(-100px + ($i * 25px)) scale($scale);
+                    }
+                    $i: $i + 1;
+                }
+                &:last-child {
+                    position: relative;
+                    transform: scale(1);
+                    transition: none;
+                }
+                &:not(:last-child) {
+                    cursor: pointer;
+                    &:hover {
+                        margin-top: -5px;
+                    }
+                    &:active {
+                        margin-top: -10px;
+                    }
+                }
+            }
+            .slide.next-active {
+                z-index: 2;
+                transform: scale(1);
+            }
+        }
+    }
+
+    .info {
+        position: relative;
+        z-index: 0;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: var(--baseSpacing) var(--baseSpacing) 0;
+        background: var(--accentAltColor) linear-gradient(to right, rgba(#fff, 0.2) 1px, transparent 1px);
+        background-size: 22.18%;
+        transition: background var(--baseAnimationSpeed);
+        .content {
+            margin-top: auto;
+            margin-bottom: auto;
+            font-size: 24px;
+            line-height: 34px;
+            padding: var(--lgSpacing) 0;
+            animation: entranceScale $landingAnimation ease-out;
+            .title {
+                line-height: 1.6em;
+            }
+            .ctrls {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: var(--smSpacing);
+                color: var(--txtHintColor);
+                margin-top: var(--baseSpacing);
+            }
+        }
+    }
+}
+
+.accent-block {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--smSpacing);
+    padding: 40px 40px 0 40px;
+    text-align: center;
+    p {
+        margin: 5px 0;
+    }
+    .preview {
+        position: relative;
+        flex-grow: 1;
+        flex-shrink: 1;
+        min-height: 0;
+        margin-top: var(--xsSpacing);
+        user-select: none;
+        // keep the preview height small to allow block shrinking but use
+        // visible overflow in case the block height is high enough to show the preview
+        height: 210px;
+    }
+}
+
+.preview-integrations {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: flex-start;
+    .screenshot {
+        position: sticky;
+        left: 0;
+        right: 0;
+    }
+    .screenshot1 {
+        margin-top: 10px;
+        margin-right: -20px;
+    }
+    .screenshot2 {
+        margin-left: -20px;
+    }
+}
+
+.preview-hotspots {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    .hotspot {
+        --hotspotRGB: var(--successRGB);
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: 180px;
+        height: 60px;
+        margin: 5px 10px 0 0;
+        background: rgba(var(--hotspotRGB), 0.4);
+        border: 1px solid rgb(var(--hotspotRGB));
+        border-radius: var(--baseRadius);
+    }
+    .hotspot2 {
+        --hotspotRGB: var(--primaryRGB);
+        position: absolute;
+        top: 100%;
+        left: 15px;
+        width: 75%;
+        margin-top: 15px;
+    }
+}
+
+.preview-comments {
+    .comment-wrapper {
+        position: relative;
+        display: inline-flex;
+        vertical-align: top;
+        justify-content: center;
+    }
+    .screenshot1 {
+        position: sticky;
+        z-index: 1;
+        left: 10px;
+        margin-top: 30px;
+    }
+    .comment-pin {
+        --pinSize: 28px;
+        position: sticky;
+        right: 10px;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--pinSize);
+        height: var(--pinSize);
+        color: #fff;
+        background: var(--warningColor);
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin: 5px 0 0 10px;
+        border-top-right-radius: 3px;
+        box-shadow: 0 0 0 4px rgba(var(--warningRGB), 0.4);
+    }
+}
+
+// responsive styles
+.page.landing {
+    // height
+    @media screen and (max-height: 1150px) {
+        .primary-row {
+            .slider {
+                height: 520px;
+                align-self: center;
+            }
+        }
+    }
+    // height
+    @media screen and (max-height: 1050px) {
+        .primary-row {
+            .slider {
+                height: 400px;
+            }
+        }
+    }
+    @media screen and (max-height: 950px) {
+        .accent-block {
+            .preview {
+                height: 100px;
+                margin-top: 0;
+            }
+        }
+    }
+    @media screen and (max-height: 750px) {
+        .primary-row {
+            .slider {
+                height: 350px;
+            }
+        }
+    }
+
+    // width
+    @media screen and (max-width: 1050px) {
+        .accent-block {
+            padding: var(--baseSpacing) var(--smSpacing) 0;
+        }
+    }
+    @media screen and (max-width: 800px) {
+        height: auto;
+        max-height: none;
+        .secondary-row {
+            display: block;
+            height: auto;
+            border-top: 0;
+        }
+        .accent-block {
+            height: auto;
+            width: 100%;
+            padding: var(--baseSpacing);
+            overflow: hidden;
+            box-shadow: none;
+            border-top: 1px solid var(--baseColor);
+            .preview {
+                height: auto;
+            }
+        }
+    }
+    @media screen and (max-width: 800px) {
+        .primary-row {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+    @media screen and (max-width: 600px) {
+        .primary-row .info {
+            text-align: center;
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+}
