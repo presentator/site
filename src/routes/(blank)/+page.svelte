@@ -80,7 +80,7 @@
                         <i class="iconoir-arrow-right"></i>
                     </a>
                     <a
-                        href="{import.meta.env.PR_REPO_URL}#installation"
+                        href="{import.meta.env.PR_REPO_URL}#local-setup"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="btn btn-lg btn-expanded btn-transparent"
