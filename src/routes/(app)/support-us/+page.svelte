@@ -13,10 +13,12 @@
         and/or donating a small amount:
     </p>
     <div class="donation-btns">
-        <a href={import.meta.env.PR_PAYPAL_URL} class="btn btn-lg btn-outline btn-block btn-paypal" target="_blank" rel="noopener noreferrer">
-            <span class="txt">Donate with PayPal</span>
-        </a>
-        <a href={import.meta.env.PR_PATREON_URL} class="btn btn-lg btn-outline btn-block btn-patreon" target="_blank" rel="noopener noreferrer">
+        <a
+            href={import.meta.env.PR_PATREON_URL}
+            class="btn btn-lg btn-outline btn-block btn-patreon"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
             <span class="txt">Donate with Patreon</span>
         </a>
     </div>
@@ -30,9 +32,6 @@
         margin: var(--baseSpacing) auto;
         width: 350px;
         max-width: 100%;
-        .btn-paypal:before {
-            background: #0070ba;
-        }
         .btn-patreon:before {
             background: #e85b46;
         }
